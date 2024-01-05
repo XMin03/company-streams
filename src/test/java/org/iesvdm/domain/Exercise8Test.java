@@ -4,10 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 public class Exercise8Test extends CompanyDomainForKata
 {
     /**
@@ -17,12 +20,15 @@ public class Exercise8Test extends CompanyDomainForKata
     @Tag("KATA")
     public void totalOrderValuesByCity()
     {
+        //no he sido capaz de usar esas dos(creo que hay que usar un reduce).
         java.util.function.Supplier<Double> zeroValueFactory = () -> 0.0;
         java.util.function.BiFunction<Double, Customer, Double> aggregator = (result, customer) -> result + customer.getTotalOrderValue();
         Map<String, Double> map;
-        map = null;
+        map = this.company.getCustomers().stream()
+                .map(c -> new Object[]{c.getCity(),c.getTotalOrderValue()})
+                .collect(Collectors.groupingBy( (ao -> (String) ao[0]),Collectors.mapping( ao -> ((Double) ao[1]), Collectors.summingDouble(Double::doubleValue))));
 
-        Assertions.assertEquals(2, map);
+        Assertions.assertEquals(2, map.size());
         Assertions.assertEquals(446.25, map.get("London"), 0.0);
         Assertions.assertEquals(857.0, map.get("Liphook"), 0.0);
     }
@@ -37,9 +43,12 @@ public class Exercise8Test extends CompanyDomainForKata
     {
         Function<Customer, String> cityFunction = Customer::getCity;
         Function<Customer, Double> totalOrderValueFunction = Customer::getTotalOrderValue;
-        Map<String, Double> map = null;
+        //demasiado mejor, porque no he llegado a eso.....
+        Map<String, Double> map = this.company.getCustomers().stream()
+                .collect(Collectors.groupingBy(cityFunction,
+                        Collectors.mapping(totalOrderValueFunction, Collectors.summingDouble(Double::doubleValue))));
 
-        Assertions.assertEquals(2, map);
+        Assertions.assertEquals(2, map.size());
         Assertions.assertEquals(446.25, map.get("London"), 0.0);
         Assertions.assertEquals(857.0, map.get("Liphook"), 0.0);
     }
@@ -51,6 +60,7 @@ public class Exercise8Test extends CompanyDomainForKata
     @Tag("KATA")
     public void totalOrderValuesByItem()
     {
+        /*nah nah nah nah yo paso, adiiiiioooossss*/
         java.util.function.Supplier<Double> zeroValueFactory = () -> 0.0;
         java.util.function.BiFunction<Double, LineItem, Double> aggregator = (result, lineItem) -> result + lineItem.getValue();
         Map<String, Double> map = null;

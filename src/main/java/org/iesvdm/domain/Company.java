@@ -15,6 +15,7 @@ package org.iesvdm.domain;
 import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -51,12 +52,7 @@ public class Company
     public List<Order> getOrders()
     {
         //Refactor this code to use as part of Exercise 3
-        List<Order> orders = new ArrayList<>();
-        for (Customer customer : this.customers)
-        {
-            orders.addAll(customer.getOrders());
-        }
-        return orders;
+        return customers.stream().map(Customer::getOrders).flatMap(Collection::stream).toList();
     }
 
     public Customer getMostRecentCustomer()
@@ -88,7 +84,6 @@ public class Company
      */
     public Customer getCustomerNamed(String name)
     {
-        Assertions.fail("Implement this method as part of Exercise 2");
-        return null;
+        return customers.stream().filter(customer -> customer.getName().equals(name)).findFirst().orElse(null);
     }
 }

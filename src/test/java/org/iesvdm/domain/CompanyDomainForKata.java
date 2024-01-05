@@ -34,14 +34,16 @@ public abstract class CompanyDomainForKata
          * TODO 7: Refactor Order and its API so this repetition is not necessary.
          */
         // TODO 7: Add 3 cups at 1.5 each to the order
-        fredOrder.addLineItem(new LineItem("cup", 1.5));
-        fredOrder.addLineItem(new LineItem("cup", 1.5));
-        fredOrder.addLineItem(new LineItem("cup", 1.5));
+        for (int i = 0; i < 3; i++)
+        {
+            fredOrder.addLineItem(new LineItem("cup", 1.5));
+        }
 
         // TODO 7: Add 3 saucers at 1.0 each to the order
-        fredOrder.addLineItem(new LineItem("saucer", 1.0));
-        fredOrder.addLineItem(new LineItem("saucer", 1.0));
-        fredOrder.addLineItem(new LineItem("saucer", 1.0));
+        for (int i = 0; i < 3; i++)
+        {
+            fredOrder.addLineItem(new LineItem("saucer", 1.0));
+        }
 
         fredOrder.addLineItem(new LineItem("chair", 12.50));
         fredOrder.addLineItem(new LineItem("table", 1.0));
@@ -55,16 +57,16 @@ public abstract class CompanyDomainForKata
         maryOrder.addLineItem(new LineItem("big shed", 500.0));
 
         // TODO 7: Add 4 cups at 1.50 each to the order
-        maryOrder.addLineItem(new LineItem("cup", 1.5));
-        maryOrder.addLineItem(new LineItem("cup", 1.5));
-        maryOrder.addLineItem(new LineItem("cup", 1.5));
-        maryOrder.addLineItem(new LineItem("cup", 1.5));
+        for (int i = 0; i < 4; i++)
+        {
+            maryOrder.addLineItem(new LineItem("cup", 1.5));
+        }
 
         // TODO 7: Add 4 saucers at 1.50 each to the order
-        maryOrder.addLineItem(new LineItem("saucer", 1.5));
-        maryOrder.addLineItem(new LineItem("saucer", 1.5));
-        maryOrder.addLineItem(new LineItem("saucer", 1.5));
-        maryOrder.addLineItem(new LineItem("saucer", 1.5));
+        for (int i = 0; i < 4; i++)
+        {
+            maryOrder.addLineItem(new LineItem("saucer", 1.5));
+        }
 
         maryOrder.addLineItem(new LineItem("sofa", 120.0));
         maryOrder.addLineItem(new LineItem("dog", 75.0));
